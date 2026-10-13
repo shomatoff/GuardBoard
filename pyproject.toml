@@ -1,0 +1,9 @@
+[project]
+name = "guardboard"
+version = "0.1.0.dev0"
+description = "Local-first Linux security and monitoring command center"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

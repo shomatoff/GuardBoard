@@ -1,0 +1,6 @@
+[alerts]
+cpu_temperature = 90.0
+gpu_temperature = 90.0
+memory = 90.0
+disk = 90.0
+battery = 15.0

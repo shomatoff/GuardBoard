@@ -33,6 +33,7 @@ Status: public development snapshot authorized by the owner on 2026-10-13. Guard
 - Project integrity and secret indicator scans are bounded and explicitly requested. ClamAV scan orchestration is tested with mocks; no real project scan is claimed.
 - Publication-gate run: 53 passing automated tests, zero failures and zero skips. The browser tests now use a temporary loopback port, so an existing local GuardBoard session does not interfere. One third-party Starlette/httpx deprecation warning remains.
 - The first public CI run failed because its workflow did not create the `.venv` required by `run.sh`; the workflow was corrected and must pass before local deletion.
+- A later CI run exposed a browser assertion that assumed Wi-Fi hardware on the runner. The assertion now checks the Wi-Fi page's capabilities section, which remains valid when hardware is unavailable; hardware-specific parser behavior is covered by unit tests.
 - A short local telemetry sample met the stated CPU and memory targets on one machine; this is not a universal performance guarantee or a finished workload benchmark.
 
 ## Known limits and risks

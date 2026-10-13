@@ -84,7 +84,7 @@ def test_navigation_language_theme_and_palette(demo):
                 assert not any('/api/network/public-ip' in url for url in requests)
                 page.locator('nav a[href="#/wifi"]').click()
                 expect(page.locator('#heading')).to_have_text('Wi-Fi')
-                expect(page.locator('.standard-list span').first).to_be_visible()
+                expect(page.get_by_role('heading', name='ADAPTER CAPABILITIES')).to_be_visible()
                 assert not any('/api/wifi/scan' in url for url in requests)
             browser.close()
     finally:

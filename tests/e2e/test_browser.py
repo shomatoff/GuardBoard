@@ -19,10 +19,12 @@ def test_navigation_language_theme_and_palette(demo):
     with socket.socket() as probe:
         probe.bind(('127.0.0.1', 0))
         port = probe.getsockname()[1]
-    server = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+    server = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                               text=True, env={**os.environ, 'GUARDBOARD_PORT': str(port)})
     try:
-        url = server.stdout.readline().split('GuardBoard local URL: ', 1)[1].strip()
+        first_line = server.stdout.readline().strip()
+        assert first_line.startswith('GuardBoard local URL: '), f'Server failed to start: {first_line}'
+        url = first_line.removeprefix('GuardBoard local URL: ')
         for _ in range(50):
             try:
                 urlopen(url, timeout=1).close()

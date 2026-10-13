@@ -45,8 +45,10 @@ jobs:
         with:
           name: GuardBoard-Linux-x64
           path: packages
-      - name: Publish Linux download
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.ref_name }}
-        run: gh release create "$RELEASE_TAG" packages/* --verify-tag --title "GuardBoard $RELEASE_TAG" --notes-file docs/RELEASE_NOTES.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: GuardBoard ${{ github.ref_name }}
+          body_path: docs/RELEASE_NOTES.md
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: true
+          files: packages/*

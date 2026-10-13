@@ -53,4 +53,8 @@ Status: public development snapshot authorized by the owner on 2026-10-13. Guard
 
 ## Publication checkpoint — 2026-10-13
 
-The owner explicitly instructed that the current project be uploaded to GitHub, remotely verified, and then removed from this computer. This changes the earlier local-only publication restriction for this development snapshot. The repository must clearly remain marked as work in progress. No GitHub release or production-readiness claim is authorized by this checkpoint.
+The owner explicitly instructed that the current project be uploaded to GitHub, remotely verified, and then removed from this computer. This changes the earlier local-only publication restriction for this development snapshot. The repository remains marked as work in progress. A later request authorized a comparable development package and release; no production-readiness claim is authorized.
+
+## Distribution follow-up — 2026-10-13
+
+The owner subsequently asked for the same GitHub presentation and downloadable package process used by their other projects. A Linux x64 development archive, SHA256 checksum, three-language screenshots and guides, two-Ubuntu test matrix, package smoke test, and tagged prerelease workflow were prepared. Local validation: 53 automated tests passed; the frozen binary served demo and real mode on loopback and wrote real-mode data to an isolated XDG directory; the archive checksum passed. This checkpoint does not complete stages 2–10 or establish production readiness. GitHub CI and published-asset verification remain required before the distribution is called finished.

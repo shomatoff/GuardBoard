@@ -31,3 +31,5 @@
 - Current performance measurement from Milestone 2 covers a 12-second local telemetry sample, not all finished workloads.
 
 The public repository is a work in progress. A production release still requires the full product, tests, visual review, documentation and security audit.
+
+The `v0.1.0-dev.1` Linux archive is a development preview. Local package smoke checks cover loopback startup, authentication, static assets, demo mode, real telemetry, and XDG data storage. The archive is unsigned; compatibility beyond the tested Ubuntu 24.04 x64 host is unverified.

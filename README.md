@@ -1,8 +1,22 @@
 # GuardBoard
 
+Languages: **English** · [O‘zbekcha](docs/README.uz.md) · [Русский](docs/README.ru.md)
+
 **Ultimate Linux Security, Privacy, Network & Performance Command Center.** GuardBoard is a local-first Linux monitoring and defensive security application. This repository is under active development. The current build has a localhost-only FastAPI server, ten navigable sections, Uzbek/English/Russian labels, themes, live hardware and network telemetry, Wi-Fi diagnostics, and selected project protection. The radar deliberately displays insufficient evidence until all defensive categories can be assessed.
 
 ## Install and run
+
+Development preview archive: [GitHub Releases](https://github.com/shomatoff/GuardBoard/releases). Download `GuardBoard-Linux-x64.tar.gz` and `SHA256SUMS` from the same release, then run:
+
+```bash
+sha256sum -c SHA256SUMS
+tar -xzf GuardBoard-Linux-x64.tar.gz
+./GuardBoard/GuardBoard
+```
+
+The archive bundles Python dependencies and the local frontend for Linux x64. It is unsigned and initially validated on Ubuntu 24.04. The first run creates private application data under `~/.local/share/guardboard`. Keep the terminal open and open the printed localhost URL in your browser. Run `./GuardBoard/GuardBoard --demo` for labeled sample data. This is a development preview, not a production security tool.
+
+### Run from source
 
 Requires Python 3.11+.
 
@@ -34,10 +48,13 @@ Ubuntu 24.04 on AMD hardware has been smoke tested. Other distributions and sens
 
 ## Current screenshots
 
-- [Clearly labeled demo overview](docs/screenshots/demo-overview.png)
-- [Demo Learn page](docs/screenshots/demo-learn.png)
-- [Demo Settings page](docs/screenshots/demo-settings.png)
-- [Demo Settings on mobile](docs/screenshots/demo-settings-mobile.png)
+| Actual demo screen | Uzbek | English | Russian |
+|---|---|---|---|
+| Overview | [Open](docs/screenshots/demo-uz-overview.png) | [Open](docs/screenshots/demo-en-overview.png) | [Open](docs/screenshots/demo-ru-overview.png) |
+| Security | [Open](docs/screenshots/demo-uz-security.png) | [Open](docs/screenshots/demo-en-security.png) | [Open](docs/screenshots/demo-ru-security.png) |
+| Settings | [Open](docs/screenshots/demo-uz-settings.png) | [Open](docs/screenshots/demo-en-settings.png) | [Open](docs/screenshots/demo-ru-settings.png) |
+
+[Demo Learn page](docs/screenshots/demo-learn.png) · [Mobile Settings](docs/screenshots/demo-settings-mobile.png)
 
 Screenshots are local captures from the running application in demo mode, not design mockups. Real monitoring screenshots are excluded to protect host information.
 

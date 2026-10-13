@@ -6,6 +6,7 @@ import asyncio
 import hmac
 import os
 import secrets
+import sys
 import tomllib
 from pathlib import Path
 
@@ -37,8 +38,13 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, field_validator
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(sys._MEIPASS) if getattr(sys, "frozen", False) else Path(__file__).resolve().parents[1]
 FRONTEND = ROOT / "frontend"
+if getattr(sys, "frozen", False):
+    xdg_data_home = Path(os.environ.get("XDG_DATA_HOME", ""))
+    DATA_ROOT = (xdg_data_home if xdg_data_home.is_absolute() else Path.home() / ".local" / "share") / "guardboard"
+else:
+    DATA_ROOT = ROOT / ".local"
 ALLOWED_HOSTS = {"127.0.0.1", "localhost"}
 PORT = int(os.environ.get("GUARDBOARD_PORT", "8765"))
 if not 1024 <= PORT <= 65535:
@@ -96,23 +102,23 @@ class RoomInput(BaseModel):
 def create_app(demo: bool = False, history_path: Path | None = None, room_path: Path | None = None, device_path: Path | None = None, integrity_path: Path | None = None, allowed_project_root: Path | None = None) -> FastAPI:
     app = FastAPI(title="GuardBoard", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.demo = demo
-    app.state.history = None if demo else HistoryStore(history_path or ROOT / ".local" / "history-real.sqlite")
+    app.state.history = None if demo else HistoryStore(history_path or DATA_ROOT / "history-real.sqlite")
     app.state.processes = ProcessSampler()
     app.state.network = NetworkSampler()
     app.state.wifi = WifiScanner()
-    app.state.rooms = None if demo else RoomStore(room_path or ROOT / ".local" / "wifi-rooms.sqlite")
-    app.state.devices = None if demo else DeviceStore(device_path or ROOT / ".local" / "devices.sqlite")
-    app.state.integrity = None if demo else IntegrityStore(integrity_path or ROOT / ".local" / "integrity.sqlite")
+    app.state.rooms = None if demo else RoomStore(room_path or DATA_ROOT / "wifi-rooms.sqlite")
+    app.state.devices = None if demo else DeviceStore(device_path or DATA_ROOT / "devices.sqlite")
+    app.state.integrity = None if demo else IntegrityStore(integrity_path or DATA_ROOT / "integrity.sqlite")
     app.state.av = ScanManager()
     app.state.project_root = allowed_project_root or Path.home()
-    app.state.config = None if demo else ConfigStore((history_path or ROOT / ".local" / "history-real.sqlite").with_name('config.toml'))
+    app.state.config = None if demo else ConfigStore((history_path or DATA_ROOT / "history-real.sqlite").with_name('config.toml'))
     app.state.config_error = None
     try:
         thresholds = DEFAULT_THRESHOLDS if demo else app.state.config.read()
     except (OSError, ValueError, tomllib.TOMLDecodeError):
         thresholds = DEFAULT_THRESHOLDS
         app.state.config_error = 'config_invalid'
-    app.state.alerts = None if demo else AlertStore((history_path or ROOT / ".local" / "history-real.sqlite").with_name('alerts.sqlite'), thresholds)
+    app.state.alerts = None if demo else AlertStore((history_path or DATA_ROOT / "history-real.sqlite").with_name('alerts.sqlite'), thresholds)
 
     @app.middleware("http")
     async def guard(request: Request, call_next):

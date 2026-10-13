@@ -18,3 +18,6 @@ id_ed25519*
 playwright-report/
 test-results/
 docs/screenshots/real-*.png
+build/
+dist/
+*.spec

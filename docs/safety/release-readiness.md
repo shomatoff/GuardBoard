@@ -33,3 +33,5 @@
 The public repository is a work in progress. A production release still requires the full product, tests, visual review, documentation and security audit.
 
 The `v0.1.0-dev.1` Linux archive is a development preview. Local package smoke checks cover loopback startup, authentication, static assets, demo mode, real telemetry, and XDG data storage. The archive is unsigned; compatibility beyond the tested Ubuntu 24.04 x64 host is unverified.
+
+Release CI run 38428982589 passed 53 tests on Ubuntu 22.04 and 24.04, built the Ubuntu 24.04 x64 archive, checked its SHA256, and smoke-tested demo and real mode. The published archive was downloaded independently, its checksum matched, and both modes started from the extracted package. These checks validate distribution mechanics, not the unfinished privileged security features.

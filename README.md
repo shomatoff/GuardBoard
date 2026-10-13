@@ -1,12 +1,14 @@
 # GuardBoard
 
+[![GuardBoard quality and Linux package](https://github.com/shomatoff/GuardBoard/actions/workflows/ci.yml/badge.svg)](https://github.com/shomatoff/GuardBoard/actions/workflows/ci.yml)
+
 Languages: **English** · [O‘zbekcha](docs/README.uz.md) · [Русский](docs/README.ru.md)
 
 **Ultimate Linux Security, Privacy, Network & Performance Command Center.** GuardBoard is a local-first Linux monitoring and defensive security application. This repository is under active development. The current build has a localhost-only FastAPI server, ten navigable sections, Uzbek/English/Russian labels, themes, live hardware and network telemetry, Wi-Fi diagnostics, and selected project protection. The radar deliberately displays insufficient evidence until all defensive categories can be assessed.
 
 ## Install and run
 
-Development preview archive: [GitHub Releases](https://github.com/shomatoff/GuardBoard/releases). Download `GuardBoard-Linux-x64.tar.gz` and `SHA256SUMS` from the same release, then run:
+Development preview archive: [GuardBoard v0.1.0-dev.1](https://github.com/shomatoff/GuardBoard/releases/tag/v0.1.0-dev.1). Download `GuardBoard-Linux-x64.tar.gz` and `SHA256SUMS` from that release, then run:
 
 ```bash
 sha256sum -c SHA256SUMS
@@ -36,7 +38,7 @@ Open the exact local URL printed in the terminal. Each server run generates a ne
 node --check frontend/js/app.js
 ```
 
-The latest verified local result is recorded in [PLAN.md](PLAN.md). Chrome may be unavailable elsewhere; the browser test then skips. Tests do not perform privileged system changes or external diagnostics.
+The [release CI run](https://github.com/shomatoff/GuardBoard/actions/runs/38428982589) passed 53 automated tests on each of Ubuntu 22.04 and 24.04, built the Linux archive, checked its SHA256, and smoke-tested demo and real package startup. The published archive was downloaded, checked again, and smoke-tested locally. Chrome may be unavailable elsewhere; the browser test then skips. Tests do not perform privileged system changes or external diagnostics.
 
 ## Security and privacy
 
